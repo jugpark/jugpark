@@ -3,7 +3,7 @@ const app = express()
 const port = 5000
 const cookieParser = require('cookie-parser');
 const config = require('./server/config/key');
-const { auth } = require('./middleware/auth')
+const { auth } = require('./server/middleware/auth')
 const { User } = require("./server/models/User");
 //application/x-www-form-unlencoded -parse(분석)
 app.use(express.urlencoded({ extended: true }));
@@ -20,6 +20,10 @@ mongoose.connect(config.mongoURI)
 //catch -> if there are some errors, catch it and return error
 
 app.get('/', (req, res) => res.send('Hello World! really'))
+
+app.get('/api/hello', (req, res) => {
+    res.send("안녕하세요")
+})
 
 app.post('/api/users/register', (req, res) => {
     //while registering for a member, take some information from client and put it into datebase.
